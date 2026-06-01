@@ -1,15 +1,15 @@
 # Contribution [#]: [Issue Title]
 
 **Contribution Number:** [1 / 2 / 3]  
-**Student:** [Your Name]  
-**Issue:** [GitHub issue link]  
-**Status:** [Phase I / Phase II / Phase III / Phase IV] [In Progress / Complete]
+**Student:** Satyam Dhar  
+**Issue:** [GitHub issue link](https://github.com/TEAMMATES/teammates/issues/13469)  
+**Status:** [**Phase I** / Phase II / Phase III / Phase IV] [In Progress / Complete]
 
 ---
 
 ## Why I Chose This Issue
 
-[1-2 paragraphs explaining why this issue interests you, how it matches your skills/learning goals, what you hope to learn]
+I chose to try to fix this issue because it aligns well with my strengths. A lot of my background is in Frontend development, as I've built and deployed multiple full-stack web apps. I've spent a lot of time working with and designing user interfaces and consistent layouts, and this specific issue seems like a basic UI/styling inconsistency that I can fix. The expected solution details also seem fairly well outlined which many contributors have not been able to meet. From this I hope to learn what kinds of issues may arise when updating frameworks/libraries, as it seems this issue occurred due to the codebase upgrading their Bootstrap version. I've never personally encountered such issues when upgrading libraries, so I'm curious to see what comes with it. 
 
 ---
 
