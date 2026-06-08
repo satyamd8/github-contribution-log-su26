@@ -3,7 +3,7 @@
 **Contribution Number:** [1 / 2 / 3]  
 **Student:** Satyam Dhar  
 **Issue:** [GitHub issue link](https://github.com/TEAMMATES/teammates/issues/13469)  
-**Status:** [**Phase I** / Phase II / Phase III / Phase IV] [In Progress / Complete]
+**Status:** [Phase I / **Phase II** / Phase III / Phase IV] [In Progress / Complete]
 
 ---
 
@@ -17,19 +17,24 @@ I chose to try to fix this issue because it aligns well with my strengths. A lot
 
 ### Problem Description
 
-[In your own words, what's broken or missing?]
+In the admin notification page, there's a table to modify the attributes of certain notifications. Under the Style column, the individual cells have transparent backgrounds instead of colored. 
 
 ### Expected Behavior
 
-[What should happen?]
+The individual cells should have color-coded backgrounds, corresponding to the color specified in the text, serving as a preview for the admin to see what the notification would look like for users.
 
 ### Current Behavior
 
-[What actually happens?]
+The cells just have a transparent background color, only showing the text of the color/style. 
 
 ### Affected Components
 
-[Which parts of the codebase are involved?]
+The admin notification page and notification component Angular files are the only ones affected: 
+admin-notifications-page.component.html
+admin-notifications-page.component.ts
+notifications-table.component.html
+notification-style-class.pipe.ts
+notifications-table.component.scss
 
 ---
 
@@ -37,20 +42,22 @@ I chose to try to fix this issue because it aligns well with my strengths. A lot
 
 ### Environment Setup
 
-[Notes on setting up your local development environment - challenges you faced, how you solved them]
+The steps to setup the environment are very simple, as they're clearly outlined in the teammates developer documentation. You must first fork the repo, clone the fork, and add the main repo as a remote and fetch all the updates. Make sure to have Java JDK 21, Node.js (minimum version 24), and Docker installed. You must then generate the config files and frontend dependencies. To start the local application, you start the docker database, apply the migrations, and start the backend and frontend servers. You can then create test accounts by logging in as an admin and creating instructor accounts to access all features.
+The hiccups I ran in to occurred when I tried to access the admin page. These happened due to issues with the database migration, which was resolved by redoing the migration.
 
 ### Steps to Reproduce
 
-1. [Step 1]
-2. [Step 2]
-3. [Observed result]
+1. Follow the steps to head to the admin login page and login as a test admin.
+2. Go to the /web/admin/notifications route and create new notifications.
+3. [Observed result] - The entire table has a light green background color.
 
 ### Reproduction Evidence
 
-- **Commit showing reproduction:** [Link to commit in your fork]
-- **Screenshots/logs:** [If applicable]
-- **My findings:** [What you discovered during reproduction]
+- **Commit showing reproduction:** https://github.com/satyamd8/teammates
+- **Screenshots/logs:** <img width="1621" height="513" alt="image" src="https://github.com/user-attachments/assets/ede09f3a-500b-4fc9-9329-fccfcc3bc3b3" />
 
+- **My findings:** [What you discovered during reproduction]
+ Unlike the screenshot in the issue, the entire table has a light green background color. Issue still exists as the style column isn't colored. I wonder if the green is intentional, from an update that occurred after the issue was created, or if it's a bug that I'm running in to. 
 ---
 
 ## Solution Approach
