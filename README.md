@@ -1,4 +1,4 @@
-# Contribution [#]: [Issue Title]
+# Contribution [#]: Admin Notification Table Styling (teammates)
 
 **Contribution Number:** [1 / 2 / 3]  
 **Student:** Satyam Dhar  
