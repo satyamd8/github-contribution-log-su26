@@ -49,45 +49,48 @@ The hiccups I ran in to occurred when I tried to access the admin page. These ha
 
 1. Follow the steps to head to the admin login page and login as a test admin.
 2. Go to the /web/admin/notifications route and create new notifications.
-3. [Observed result] - The entire table has a light green background color.
+3. [Observed result] - The entire table has a light green background color (only on the first build).
 
 ### Reproduction Evidence
 
 - **Commit showing reproduction:** https://github.com/satyamd8/teammates
-- **Screenshots/logs:** <img width="1621" height="513" alt="image" src="https://github.com/user-attachments/assets/ede09f3a-500b-4fc9-9329-fccfcc3bc3b3" />
+- **Screenshots/logs:** <img width="1621" height="513" alt="image" src="https://github.com/user-attachments/assets/ede09f3a-500b-4fc9-9329-fccfcc3bc3b3" /> <img width="1601" height="515" alt="image" src="https://github.com/user-attachments/assets/b4a4673f-7399-4dbb-8802-771a9aa0754c" />
+
 
 - **My findings:** [What you discovered during reproduction]
- Unlike the screenshot in the issue, the entire table has a light green background color. Issue still exists as the style column isn't colored. I wonder if the green is intentional, from an update that occurred after the issue was created, or if it's a bug that I'm running in to. 
+ Unlike the first screenshot in the issue, the entire table has a light green background color indicating a newly created notification. On a second build, the table returned to the normal transparent background color. Issue still exists as the style column isn't colored. 
 ---
 
 ## Solution Approach
 
 ### Analysis
 
-[Your analysis of the root cause - what's causing the issue?]
+From the styling, it seems to be an issue with Bootstrap and how certain styling classes are applied to the cells, aka the <td> elements. The Bootstrap "alert alert" class is being applied directly to the table cell even though it's meant for block elements. 
 
 ### Proposed Solution
 
-[High-level description of your fix approach]
+The fix is fairly simple, since the alert alert class only applies to block elements, then we have to create a block elements. I can add a <div> or <span> inside of the <td> element thats specifically designated for the notification style. I can then transfer the Bootstrap classes from the <td> down to the block element that I use.
 
 ### Implementation Plan
 
 Using UMPIRE framework (adapted):
 
-**Understand:** [Restate the problem]
+**Understand:** The Bootstrap "alert alert" class is beign applied to the <td> table cell element, which doesn't do anything since the class only applies to block elements in HTML.
 
-**Match:** [What similar patterns/solutions exist in the codebase?]
+**Match:** In the same file and table, other <td> (table cell), <tr> (table row), and <th> (table header) elements have Bootstrap classes applied directly to them instead of a inner-nested block element. 
 
 **Plan:** [Step-by-step implementation plan]
-1. [Modify file X to do Y]
-2. [Add function Z]
-3. [Update tests]
+1. Add a <div> or other block element nested inside the <td> element that corresponds to the notification style column. 
+2. Remove the existing Bootstrap "alert alert" class from thr <td> element. 
+3. Transfer the Bootstrap classes to the <div> that's nested inside the <td>.
 
-**Implement:** [Link to your branch/commits as you work]
+**Implement:** https://github.com/satyamd8/teammates/commit/dd82abf81549d1e7ae30069fc87fc4c5e8171cc2
 
 **Review:** [Self-review checklist - does it follow the project's contribution guidelines?]
+- Followed correct commit message format
+- Didn't change the vision of the styling, followed the guidelines of the expected solution
 
-**Evaluate:** [How will you verify it works?]
+**Evaluate:** I'll verify by checking the local environment again, and goign to the /web/admin/notifications route to ensure the table cell styling is correct
 
 ---
 
