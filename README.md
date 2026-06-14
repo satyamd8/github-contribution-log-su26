@@ -1,9 +1,9 @@
-# Contribution [#]: Admin Notification Table Styling (teammates)
+# Contribution [#1]: Admin Notification Table Styling (teammates)
 
-**Contribution Number:** [1 / 2 / 3]  
+**Contribution Number:** [**1** / 2 / 3]  
 **Student:** Satyam Dhar  
 **Issue:** [GitHub issue link](https://github.com/TEAMMATES/teammates/issues/13469)  
-**Status:** [Phase I / **Phase II** / Phase III / Phase IV] [In Progress / Complete]
+**Status:** [Phase I / Phase II / **Phase III** / Phase IV] [In Progress / **Complete**]
 
 ---
 
@@ -65,24 +65,24 @@ The hiccups I ran in to occurred when I tried to access the admin page. These ha
 
 ### Analysis
 
-From the styling, it seems to be an issue with Bootstrap and how certain styling classes are applied to the cells, aka the <td> elements. The Bootstrap "alert alert" class is being applied directly to the table cell even though it's meant for block elements. 
+From the styling, it seems to be an issue with Bootstrap and how certain styling classes are applied to the cells, aka the td elements. The Bootstrap "alert alert" class is being applied directly to the table cell even though it's meant for block elements. 
 
 ### Proposed Solution
 
-The fix is fairly simple, since the alert alert class only applies to block elements, then we have to create a block elements. I can add a <div> or <span> inside of the <td> element thats specifically designated for the notification style. I can then transfer the Bootstrap classes from the <td> down to the block element that I use.
+The fix is fairly simple, since the alert alert class only applies to block elements, then we have to create a block elements. I can add a div or span inside of the td element thats specifically designated for the notification style. I can then transfer the Bootstrap classes from the td down to the block element that I use.
 
 ### Implementation Plan
 
 Using UMPIRE framework (adapted):
 
-**Understand:** The Bootstrap "alert alert" class is beign applied to the <td> table cell element, which doesn't do anything since the class only applies to block elements in HTML.
+**Understand:** The Bootstrap "alert alert" class is beign applied to the td table cell element, which doesn't do anything since the class only applies to block elements in HTML.
 
-**Match:** In the same file and table, other <td> (table cell), <tr> (table row), and <th> (table header) elements have Bootstrap classes applied directly to them instead of a inner-nested block element. 
+**Match:** In the same file and table, other td (table cell), tr (table row), and th (table header) elements have Bootstrap classes applied directly to them instead of a inner-nested block element. 
 
 **Plan:** [Step-by-step implementation plan]
-1. Add a <div> or other block element nested inside the <td> element that corresponds to the notification style column. 
-2. Remove the existing Bootstrap "alert alert" class from thr <td> element. 
-3. Transfer the Bootstrap classes to the <div> that's nested inside the <td>.
+1. Add a div or other block element nested inside the td element that corresponds to the notification style column. 
+2. Remove the existing Bootstrap "alert alert" class from thr td element. 
+3. Transfer the Bootstrap classes to the div that's nested inside the td.
 
 **Implement:** https://github.com/satyamd8/teammates/commit/dd82abf81549d1e7ae30069fc87fc4c5e8171cc2
 
@@ -90,7 +90,7 @@ Using UMPIRE framework (adapted):
 - Followed correct commit message format
 - Didn't change the vision of the styling, followed the guidelines of the expected solution
 
-**Evaluate:** I'll verify by checking the local environment again, and goign to the /web/admin/notifications route to ensure the table cell styling is correct
+**Evaluate:** I'll verify by checking the local environment again, and going to the /web/admin/notifications route to ensure the table cell styling is correct
 
 ---
 
@@ -98,36 +98,47 @@ Using UMPIRE framework (adapted):
 
 ### Unit Tests
 
-- [ ] Test case 1: [Description]
-- [ ] Test case 2: [Description]
-- [ ] Test case 3: [Description]
+- [x] Test case 1: Verified that notification styling rendered as an alert div with the correct Bootstrap class rather than its own element
+- [x] Test case 2: Verified that the alert Bootstrap styling is applied to the div, transferred from the td element
+- [x] Test case 3: Verified that the notification style description text is correctly displayed inside the alert div
+
+### Snapshot Tests
+
+- Updated 2 failed snapshots in notifications-table.component.spec.ts to reflect the new HTML structure (alert div wrapped inside td instead of alert classes on td)
+- Snapshots updated using Vitest watch mode (npm run test → press u to auto-update)
+- Verified that only the intended structure changes appeared in snapshots after update
 
 ### Integration Tests
 
-- [ ] Integration scenario 1
-- [ ] Integration scenario 2
+- [x] Verified that the notification table is rendered correctly with multiple notification types and their respective alert styles/colors.
 
 ### Manual Testing
 
 [What you tested manually and results]
 
+I manually tested the notification table and the styling through my browser in my private local environment of Teammates. I successfully confirmed that the notification styles displayed their correct colors, that the alert styling wasn't interfering with the table layout, and that all spacing, alignment, and styling was correct. 
+
 ---
 
 ## Implementation Notes
 
-### Week [X] Progress
+### Week [2] Progress
 
-[What you built this week, challenges faced, decisions made]
+- I refactored notifications table style cell to use a div class="alert alert-..." wrapper instead of applying alert classes directly to the <td> element, which initially wasn't applying the correct style at all since alert classes only work on block elements. 
+- This fixes the Bootstrap 5.3.0 compatibility issue where alert classes on table cells produced undefined styling behavior
+- I verified on my local environment that the changes matched the expected solution outlined by one of the maintainers in the original issue thread. 
 
-### Week [Y] Progress
+### Week [3] Progress
 
-[Continue documenting as you work]
+- I ran into an issue when running the codebases tets suite, which included both unit component tests and snapshot tests that tested individual frontend components and rendered snapshots against stored snapshots.
+- One of the issues was incorrect formatting within the HTML, which was fixed through applying formatting through VSCode's Prettier extension.
+- Another issue was that I was failing the snapshot tests that checked the notification table, so when running the tests in Vitest mode, I had to auto-update the snapshots to pass those tests. 
 
 ### Code Changes
 
-- **Files modified:** [List]
-- **Key commits:** [Links to important commits]
-- **Approach decisions:** [Why you chose certain approaches]
+- **Files modified:** notifications-table.component.html, notifications-table.component.spec.ts.snap
+- **Key commits:** https://github.com/TEAMMATES/teammates/commit/b9b2315b0c2c4420b43f7baafa4a432321f05b8d
+- **Approach decisions:** I intentionally chose to make the simple fix and transfer the alert classes from the original table cell that it was beign applied to, to a new div that would be nested inside the table cell. I did this to folow the guidelines of the expected solution that were outlined by a maintainer in the original issue thread, as many users that had submitted PRs before ended up changing the original styling of the whole table cell. 
 
 ---
 
