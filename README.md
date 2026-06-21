@@ -3,7 +3,7 @@
 **Contribution Number:** [**1** / 2 / 3]  
 **Student:** Satyam Dhar  
 **Issue:** [GitHub issue link](https://github.com/TEAMMATES/teammates/issues/13469)  
-**Status:** [Phase I / Phase II / **Phase III** / Phase IV] [In Progress / **Complete**]
+**Status:** Phase IV **Complete**
 
 ---
 
@@ -144,15 +144,18 @@ I manually tested the notification table and the styling through my browser in m
 
 ## Pull Request
 
-**PR Link:** [GitHub PR URL when submitted]
+**PR Link:** https://github.com/TEAMMATES/teammates/pull/14140
 
-**PR Description:** [Draft or final PR description - much of the content above can be adapted]
+**PR Description:** 
+Fixes #13469 Admin Notification Page: broken styling on style column
+Outline of Solution:
+The issue occurred due to the Bootstrap "alert alert-*" class being applied to the table cell element instead of a block element. This was fixed by adding a div nested inside the td element, and transferring the Bootstrap class to that div instead, following the guidelines of the expected solution.
 
 **Maintainer Feedback:**
-- [Date]: [Summary of feedback received]
-- [Date]: [How you addressed it]
+- 6/8: Maintainer requested for screenshots showing the change in the PR description.
+- 6/8: I immediately included the before and after screenshots in the description.
 
-**Status:** [Awaiting review / Iterating / Approved / Merged]
+**Status:**  **Merged**
 
 ---
 
@@ -161,14 +164,18 @@ I manually tested the notification table and the styling through my browser in m
 ### Technical Skills Gained
 
 [What you learned technically]
+- An important technical skill I learned was how to navigate through unfamiliar codebases, and single out the specific directories and/or files that I need to modify for a specific issue. When I first forked the repo, there were stacks and stacks of folders and files to look through just in the frontend. By identifying the different properties of the specific issue (notification table, admin page) along with using AI to help locate directories, I was able to find the specific frontend files that corresponded to my issue.
+- Another important technical skill I learned was how to handle Pull Requests on GitHub and the steps I have to take before making changes and submitting a request. There were quite a few steps that were outlined by the maintainers to follow for anyone submitting a PR, so I had to make sure to read the documentation and follow the steps and not blindly submit a PR. 
 
 ### Challenges Overcome
 
 [What was hard and how you solved it]
+-  One big challenge I faced was trying to pass the automatic tests that were deployed when opening the Pull Request. There were a few different component tests and snapshots that kept failing, so I had to read through the developer documentation extensively to find out more about these tests. From that, I was able to run the tests on my local environment and single out the issues that caused the tests to fail. 
 
 ### What I'd Do Differently Next Time
 
 [Reflection on your process]
+- Next time I'll make sure to fully read through all parts of the developer documentation that correspond to the specific issue that I'm resolving, along with any information on Pull Requests and contributions. I didn't fully do that for this issue, which led to a slight delay in getting my PR accepted since I hadn't included all the necessary information. 
 
 ---
 
